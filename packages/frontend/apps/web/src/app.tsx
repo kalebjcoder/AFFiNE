@@ -1,8 +1,86 @@
 import './avant-garde.css';
 
+import type { CSSProperties } from 'react';
+import { useMemo, useState } from 'react';
+
+const accentOptions = [
+  { label: 'Electric Violet', value: '#a855f7' },
+  { label: 'Neo Gold', value: '#f6c56e' },
+  { label: 'Crimson Pulse', value: '#ff5c8a' },
+  { label: 'Cobalt Mist', value: '#59a7ff' },
+];
+
+const densityOptions = [
+  { label: 'Airy', value: 'airy' },
+  { label: 'Balanced', value: 'balanced' },
+  { label: 'Compact', value: 'compact' },
+];
+
+const fontOptions = [
+  { label: 'Modern Sans', value: 'sans' },
+  { label: 'Editorial Serif', value: 'serif' },
+];
+
+const lookbookItems = [
+  {
+    id: 1,
+    title: 'Chromatic Flux',
+    category: 'Digital Couture',
+    description: 'Metallic gradients and glossy textures.',
+  },
+  {
+    id: 2,
+    title: 'Modernist Noir',
+    category: 'Identity',
+    description: 'Minimal, bold typography with sharp contrast.',
+  },
+  {
+    id: 3,
+    title: 'Neo-Classicism',
+    category: 'Spatial',
+    description: 'Architectural structure with refined warmth.',
+  },
+  {
+    id: 4,
+    title: 'Luminous Echo',
+    category: 'Identity',
+    description: 'Reflective palettes and high-gloss materials.',
+  },
+  {
+    id: 5,
+    title: 'Opulent Silence',
+    category: 'Spatial',
+    description: 'Sculptural voids and intentional quiet.',
+  },
+  {
+    id: 6,
+    title: 'Binary Bloom',
+    category: 'Digital Couture',
+    description: 'AI-native visuals and generative motifs.',
+  },
+];
+
 export function App() {
+  const [accent, setAccent] = useState(accentOptions[0].value);
+  const [density, setDensity] = useState(densityOptions[1].value);
+  const [fontMode, setFontMode] = useState(fontOptions[0].value);
+  const [lookbookFilter, setLookbookFilter] = useState('All');
+  const [showGridLines, setShowGridLines] = useState(false);
+
+  const filteredLookbook = useMemo(() => {
+    if (lookbookFilter === 'All') {
+      return lookbookItems;
+    }
+    return lookbookItems.filter(item => item.category === lookbookFilter);
+  }, [lookbookFilter]);
+
   return (
-    <div className="avant-garde">
+    <div
+      className={`avant-garde density-${density} font-${fontMode} ${
+        showGridLines ? 'show-grid' : ''
+      }`}
+      style={{ '--accent-color': accent } as CSSProperties}
+    >
       <header className="hero">
         <nav className="nav">
           <span className="logo">Avant Garde</span>
@@ -26,6 +104,16 @@ export function App() {
               <button className="primary">Start a project</button>
               <button className="secondary">View manifesto</button>
             </div>
+            <div className="hero-kicker">
+              <div>
+                <strong>Creative Direction</strong>
+                <span>Immersive brand environments</span>
+              </div>
+              <div>
+                <strong>Customizable</strong>
+                <span>Tailor palettes & rhythm live</span>
+              </div>
+            </div>
           </div>
           <div className="hero-card">
             <div className="hero-card-top">
@@ -47,6 +135,66 @@ export function App() {
       </header>
 
       <main>
+        <section id="customize" className="section customize">
+          <div className="section-header">
+            <h3>Customize the atmosphere</h3>
+            <p>
+              Use the controls to adjust the Avant Garde aesthetic in real time.
+              Choose your accent color, spatial density, and editorial tone.
+            </p>
+          </div>
+          <div className="customize-controls">
+            <label>
+              Accent color
+              <select
+                value={accent}
+                onChange={event => setAccent(event.target.value)}
+              >
+                {accentOptions.map(option => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label>
+              Layout density
+              <select
+                value={density}
+                onChange={event => setDensity(event.target.value)}
+              >
+                {densityOptions.map(option => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label>
+              Typography
+              <select
+                value={fontMode}
+                onChange={event => setFontMode(event.target.value)}
+              >
+                {fontOptions.map(option => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="toggle">
+              Show grid lines
+              <input
+                type="checkbox"
+                checked={showGridLines}
+                onChange={event => setShowGridLines(event.target.checked)}
+              />
+              <span className="toggle-pill" />
+            </label>
+          </div>
+        </section>
+
         <section id="story" className="section story">
           <div>
             <h3>Our story</h3>
@@ -104,6 +252,24 @@ export function App() {
               </p>
             </article>
           </div>
+          <div className="studio-features">
+            <div>
+              <h4>Signature Modules</h4>
+              <ul>
+                <li>Art direction sprints</li>
+                <li>Material library curation</li>
+                <li>Interactive brand playbooks</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Global Access</h4>
+              <p>
+                Collaborate with a distributed network of photographers,
+                typographers, and immersive technologists.
+              </p>
+              <button className="secondary small">Request a deck</button>
+            </div>
+          </div>
         </section>
 
         <section id="lookbook" className="section lookbook">
@@ -114,22 +280,32 @@ export function App() {
               radical silhouettes.
             </p>
           </div>
+          <div className="lookbook-toolbar">
+            <label>
+              Filter by discipline
+              <select
+                value={lookbookFilter}
+                onChange={event => setLookbookFilter(event.target.value)}
+              >
+                <option value="All">All</option>
+                <option value="Identity">Identity</option>
+                <option value="Spatial">Spatial</option>
+                <option value="Digital Couture">Digital Couture</option>
+              </select>
+            </label>
+            <div className="lookbook-count">
+              Showing <strong>{filteredLookbook.length}</strong> studies
+            </div>
+          </div>
           <div className="lookbook-grid">
-            <div className="lookbook-item">
-              <span>01</span>
-              <h4>Chromatic Flux</h4>
-              <p>Metallic gradients and glossy textures.</p>
-            </div>
-            <div className="lookbook-item">
-              <span>02</span>
-              <h4>Modernist Noir</h4>
-              <p>Minimal, bold typography with sharp contrast.</p>
-            </div>
-            <div className="lookbook-item">
-              <span>03</span>
-              <h4>Neo-Classicism</h4>
-              <p>Architectural structure with refined warmth.</p>
-            </div>
+            {filteredLookbook.map(item => (
+              <div key={item.id} className="lookbook-item">
+                <span>{String(item.id).padStart(2, '0')}</span>
+                <h4>{item.title}</h4>
+                <p>{item.description}</p>
+                <span className="lookbook-category">{item.category}</span>
+              </div>
+            ))}
           </div>
         </section>
 
