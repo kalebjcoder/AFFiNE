@@ -57,6 +57,16 @@ corepack prepare yarn@stable --activate
 yarn install
 ```
 
+> **Note**
+> This repo uses Yarn workspaces (`workspace:*`), so `npm install` is not supported and will fail.
+>
+> If you ran `npm install` by mistake, clean npm artifacts and reinstall with Yarn:
+>
+> ```sh
+> rm -rf node_modules package-lock.json
+> yarn install
+> ```
+
 ### Clone repository
 
 #### Linux & MacOS
