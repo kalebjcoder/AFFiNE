@@ -80,6 +80,16 @@ find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +
 yarn install
 ```
 
+> **Note**
+> This repo relies on Yarn workspaces (`workspace:*`), so `npm install` is not supported and will fail.
+>
+> If you accidentally used npm first, clean npm artifacts before running Yarn again:
+>
+> ```shell
+> rm -rf node_modules package-lock.json
+> yarn install
+> ```
+
 On Windows (powershell)
 
 ```powershell

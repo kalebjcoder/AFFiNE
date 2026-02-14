@@ -40,7 +40,7 @@
     "!dist/__tests__"
   ],
   "devDependencies": {
-    "@vanilla-extract/vite-plugin": "^5.0.0",
+    "@vanilla-extract/vite-plugin": "^5.1.4",
     "vite": "^7.0.0",
     "vite-plugin-istanbul": "^7.0.0",
     "vite-plugin-wasm": "^3.4.1",
