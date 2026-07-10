@@ -1,0 +1,10 @@
+{
+  "name": "framer-motion",
+  "version": "12.23.6",
+  "private": true,
+  "main": "src/index.tsx",
+  "types": "src/index.tsx",
+  "dependencies": {
+    "react": "^19.0.0"
+  }
+}

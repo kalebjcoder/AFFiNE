@@ -1069,6 +1069,23 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@affine/vault@workspace:packages/frontend/apps/vault":
+  version: 0.0.0-use.local
+  resolution: "@affine/vault@workspace:packages/frontend/apps/vault"
+  dependencies:
+    "@tailwindcss/postcss": "npm:^4.0.0"
+    "@types/node": "npm:^22.0.0"
+    "@types/react": "npm:^19.0.1"
+    "@types/react-dom": "npm:^19.0.2"
+    framer-motion: "workspace:*"
+    next: "npm:^15.3.1"
+    react: "npm:^19.0.0"
+    react-dom: "npm:^19.0.0"
+    tailwindcss: "npm:^4.0.0"
+    typescript: "npm:^5.7.2"
+  languageName: unknown
+  linkType: soft
+
 "@affine/web@workspace:packages/frontend/apps/web":
   version: 0.0.0-use.local
   resolution: "@affine/web@workspace:packages/frontend/apps/web"
@@ -22947,6 +22964,14 @@ __metadata:
   checksum: 10/9c35f80cd3c9c40d22ae245f23d6fa4da77b0a0296b35a7af46c06b7f7cd57ea5db676df88cdce9e268424622c7910b1550052de2819d23b44c2005958e1ac03
   languageName: node
   linkType: hard
+
+"framer-motion@workspace:*, framer-motion@workspace:packages/frontend/framer-motion":
+  version: 0.0.0-use.local
+  resolution: "framer-motion@workspace:packages/frontend/framer-motion"
+  dependencies:
+    react: "npm:^19.0.0"
+  languageName: unknown
+  linkType: soft
 
 "fresh@npm:0.5.2":
   version: 0.5.2
